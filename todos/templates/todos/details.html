@@ -1,0 +1,8 @@
+<h1>{{list.title}}</h1>
+<div>
+	<ul>
+	{% for item in list.item_set.all %}
+		<li>{{item.name}}</br>{{item.description}}</li>
+	{% endfor %}		
+	</ul>
+</div>
