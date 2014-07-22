@@ -1,7 +1,7 @@
 {% if todo_lists%}
 	<ul>
 	{% for list in todo_lists %}
-		<li><a href="/todos/{{list.id}}">{{list.title}}</a></li>
+		<li><a href={% url 'todos:detail' list.id%}>{{list.title}}</a></li>
 	{% endfor %}
 	</ul>
 {% else %}

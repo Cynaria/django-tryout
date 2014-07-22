@@ -1,8 +1,25 @@
 <h1>{{list.title}}</h1>
 <div>
+	<h3>Completed!</h3>
 	<ul>
-	{% for item in list.item_set.all %}
-		<li>{{item.name}}</br>{{item.description}}</li>
-	{% endfor %}		
+	{% for item in list.completed_list_items %}
+		<li>{{item.name}} | {{item.description}}</li>
+	{% endfor %}
 	</ul>
+	<!-- TODO: fix form so that completed items are not in the form -->
+	{% if list.uncompleted_list_items%}
+		<form action={% url 'todos:complete' list.id %} method="post">
+		{%csrf_token%}
+		{% for item in list.uncompleted_list_items %}
+			<div>{{item.name}}:{{item.description}}
+				<input type="checkbox" name="item" value="{{item.id}}"> Complete
+			</div>
+		{% endfor %}
+		<input type="submit" value="Check off items">		
+		</form>
+	{% else %}
+		<div>
+			This list is completed!
+		</div>
+	{% endif %}
 </div>
